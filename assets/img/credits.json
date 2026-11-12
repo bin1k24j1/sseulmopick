@@ -1,0 +1,50 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f25008785.webp",
+   "files": [
+    "photo-f25008785-500.webp",
+    "photo-f25008785-960.webp",
+    "photo-f25008785.webp"
+   ],
+   "id": "f25008785",
+   "alt": "Silicon Spatulas",
+   "by": "ParentingPatch",
+   "licence": "CC BY-SA 3.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Silicon_Spatulas.JPG",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f142477914.webp",
+   "files": [
+    "photo-f142477914-500.webp",
+    "photo-f142477914-960.webp",
+    "photo-f142477914.webp"
+   ],
+   "id": "f142477914",
+   "alt": "Kitchen Drawer with Plastic Organizer",
+   "by": "Stilfehler",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Kitchen_Drawer_with_Plastic_Organizer.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f132216709.webp",
+   "files": [
+    "photo-f132216709-500.webp",
+    "photo-f132216709-960.webp",
+    "photo-f132216709.webp"
+   ],
+   "id": "f132216709",
+   "alt": "Green Handle White Sticky Brush (44273709980)",
+   "by": "Jernej Furman from Slovenia",
+   "licence": "CC BY 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Green_Handle_White_Sticky_Brush_(44273709980).jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}
