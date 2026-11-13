@@ -1,3 +1,8 @@
+# API 키 (절대 올리지 않음). .env.example만 올린다
+.env
+.env.*
+!.env.example
+
 # 요청한 제외 항목
 .claude/
 skills-lock.json
@@ -11,3 +16,6 @@ PRODUCT.md
 .playwright-mcp/
 .taste-skill/
 .serena/
+
+# 쇼츠 대본 생성 결과물 (scripts/make-script.mjs)
+output/
