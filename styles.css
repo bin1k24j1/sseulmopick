@@ -172,12 +172,6 @@ main.wrap { padding-bottom: 56px; }
   transform: rotate(var(--tilt));
   transition: transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
 }
-/* 스크롤로 들어올 때: 아래에서 살짝 떠오름 (app.js가 .reveal → .is-in) */
-.card.reveal { opacity: 0; transform: translateY(18px) rotate(var(--tilt)); }
-.card.reveal.is-in {
-  opacity: 1; transform: rotate(var(--tilt));
-  transition: opacity 360ms ease-out var(--d, 0ms), transform 520ms var(--ease-out) var(--d, 0ms);
-}
 
 .card__media { position: relative; aspect-ratio: 3 / 2; background: var(--memo); overflow: hidden; border-radius: var(--r) var(--r) 0 0; }
 .card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 320ms var(--ease-out); }
@@ -199,40 +193,68 @@ main.wrap { padding-bottom: 56px; }
   0% { transform: rotate(var(--st)) scale(1.25); box-shadow: 0 10px 18px rgba(31, 27, 22, .25); }
   100% { transform: rotate(var(--st)) scale(1); }
 }
+.badges { position: absolute; right: 12px; top: 12px; display: flex; gap: 6px; }
 .badge {
-  position: absolute; right: 12px; top: 12px;
   padding: 3px 10px; border-radius: 999px;
   background: var(--ink); color: var(--bg); font-size: 13px; font-weight: 700;
 }
+.badge--stale { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
 
 .card__body { display: flex; flex-direction: column; flex: 1; padding: 16px 16px 18px; }
 .card__meta { display: flex; gap: 8px; margin: 0 0 4px; font-size: 13px; font-weight: 600; color: var(--ink-2); }
 .card__meta span + span::before { content: "·"; margin-right: 8px; }
 .card__name { margin: 0 0 12px; font-size: 19px; font-weight: 750; line-height: 1.35; letter-spacing: -0.02em; text-wrap: balance; }
 
-/* 메모지 한 장 + 위쪽 마스킹테이프 */
-.memo {
+/* 가격 메모: 메모지 한 장 + 위쪽 마스킹테이프. 할인율이 제일 크게 */
+.deal {
   position: relative;
   margin: 10px 2px 18px; padding: 18px 14px 12px; border-radius: 3px;
   background: var(--note);
   box-shadow: 0 1px 1px rgba(31, 27, 22, .06), 0 4px 10px -6px rgba(31, 27, 22, .25);
   transform: rotate(calc(var(--tilt) * -1.4));
-  display: grid; gap: 8px;
 }
-.memo::before {
+.deal::before {
   content: ""; position: absolute; left: 50%; top: -9px; width: 76px; height: 20px;
   background: var(--tape); border-left: 1px dashed rgba(255, 90, 54, .28); border-right: 1px dashed rgba(255, 90, 54, .28);
   transform: translateX(-50%) rotate(-3deg);
 }
-.memo__row { display: grid; grid-template-columns: 72px 1fr; gap: 8px; align-items: baseline; }
-.memo__row + .memo__row { padding-top: 8px; border-top: 1.5px dashed #E8D3A8; }
-/* 나눔펜: 획이 가늘어 글자를 키워 쓴다 */
-.memo dt { font-family: var(--hand); font-size: 23px; font-weight: 400; line-height: 1; }
-.memo__row--pro dt { color: var(--ink); }
-.memo__row--con dt { color: var(--ink-2); }
-.memo dd { margin: 0; font-size: 15px; line-height: 1.5; }
+.deal p { margin: 0; }
+.deal__row { display: flex; align-items: center; gap: 14px; }
+.deal__rate {
+  font-size: 44px; font-weight: 900; line-height: 1; letter-spacing: -0.04em;
+  color: var(--accent-ink); font-variant-numeric: tabular-nums;
+}
+.deal__rate small { font-size: .55em; font-weight: 800; margin-left: 1px; }
+.deal__prices { display: grid; gap: 2px; font-variant-numeric: tabular-nums; }
+.deal__sale { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+.deal__orig { font-size: 14px; font-weight: 500; color: var(--ink-2); text-decoration-thickness: 1.5px; }
+.deal__time {
+  display: flex; align-items: center; gap: 5px;
+  margin-top: 10px !important; padding-top: 9px; border-top: 1.5px dashed #E8D3A8;
+  font-size: 14px; font-weight: 700; color: var(--ink);
+}
+.deal__time svg { width: 16px; height: 16px; flex: none; fill: none; stroke: var(--ink-2); stroke-width: 1.8; stroke-linecap: round; }
+.deal__fake {
+  margin-top: 6px !important; font-size: 13px; font-weight: 700; color: var(--accent-ink);
+}
 
-.card__actions { margin-top: auto; display: grid; gap: 4px; }
+.card__actions { margin-top: auto; display: grid; gap: 8px; }
+.card__notice { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--ink-2); text-align: center; }
+
+/* 지난 딜: 흐리게. 글자는 읽히게 두고 사진·색만 뺀다 */
+.card.is-stale { box-shadow: 0 1px 2px rgba(31, 27, 22, .06); }
+.card.is-stale .card__media img { filter: grayscale(1); opacity: .55; }
+.card.is-stale .sticker { background: #8A7F72; }
+.card.is-stale .deal { background: #F4EEE4; }
+.card.is-stale .deal::before { background: rgba(31, 27, 22, .08); border-color: rgba(31, 27, 22, .15); }
+.card.is-stale .deal__rate, .card.is-stale .deal__fake { color: var(--ink-2); }
+.card.is-stale .card__name, .card.is-stale .deal__sale { color: var(--ink-2); }
+.card.is-stale .buy {
+  background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink);
+}
+.stale { margin-top: 40px; }
+.stale__title { margin: 0 0 14px; font-size: 17px; font-weight: 800; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.stale__title span { font-size: 13px; font-weight: 600; color: var(--ink-2); }
 .buy {
   display: flex; align-items: center; justify-content: center; gap: 6px;
   height: 52px; border-radius: 12px;
@@ -244,19 +266,15 @@ main.wrap { padding-bottom: 56px; }
 }
 .buy svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms var(--ease-out); }
 .buy:active { transform: translateY(3px) scale(.99); box-shadow: 0 0 0 #C93A18, 0 2px 6px -4px rgba(201, 58, 24, .6); }
-.watch {
-  display: flex; align-items: center; justify-content: center; height: 44px;
-  font-size: 14px; font-weight: 600; color: var(--ink-2);
-}
 
 @media (hover: hover) and (pointer: fine) {
   .card:hover { transform: translateY(-3px) rotate(0deg); box-shadow: var(--shadow-up); }
   .card:hover .card__media img { transform: scale(1.03); }
   .buy:hover { background: #F24E2A; }
+  .card.is-stale .buy:hover { background: var(--bg); }
   .buy:hover svg { transform: translate(2px, -2px); }
   .chip:hover:not([aria-pressed="true"]) { border-color: var(--ink-2); }
   .search__clear:hover { background: var(--memo); }
-  .watch:hover { color: var(--ink); }
 }
 
 /* ── 크게 보여주는 상품 (featured 또는 최신) ───────────────────── */
@@ -277,7 +295,8 @@ main.wrap { padding-bottom: 56px; }
   .card--pick .card__body { padding: 28px 28px 26px; justify-content: center; }
   .card--pick .card__actions { margin-top: 4px; }
   .card--pick .card__name { font-size: 28px; margin-bottom: 18px; }
-  .card--pick .memo dd { font-size: 16px; }
+  .card--pick .deal__rate { font-size: 56px; }
+  .card--pick .deal__sale { font-size: 26px; }
 }
 
 /* 빈 상태 */
@@ -318,5 +337,5 @@ main.wrap { padding-bottom: 56px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-property: background-color, color, border-color, opacity !important; }
-  .card, .memo { transform: none; }
+  .card, .deal { transform: none; }
 }

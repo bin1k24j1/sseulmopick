@@ -1,0 +1,22 @@
+{
+  "platforms": {
+    "coupang": {
+      "label": "쿠팡",
+      "disclosure": "이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
+    },
+    "naver": {
+      "label": "네이버",
+      "disclosure": "이 페이지는 네이버 쇼핑 커넥트 활동의 일환으로, 판매 발생 시 수수료를 제공받습니다."
+    }
+  },
+  "sns": {
+    "instagram": "",
+    "youtube": "",
+    "tiktok": ""
+  },
+  "deals": [
+    { "example": true, "id": 3, "name": "손잡이 일체형 실리콘 주걱", "category": "주방", "originalPrice": 15900, "salePrice": 9900, "discountRate": 38, "checkedAt": "2026-11-13T09:00:00+09:00", "link": "https://www.coupang.com/", "platform": "coupang", "image": "assets/img/photo-f25008785-960.webp", "imageCredit": { "by": "ParentingPatch", "license": "CC BY-SA 3.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/deed.ko", "url": "https://commons.wikimedia.org/wiki/File:Silicon_Spatulas.JPG" }, "active": true },
+    { "example": true, "id": 2, "name": "칸 조절 서랍 정리함", "category": "수납", "originalPrice": 29000, "salePrice": 19900, "discountRate": 31, "checkedAt": "2026-11-12T21:00:00+09:00", "link": "https://www.coupang.com/", "platform": "coupang", "image": "assets/img/photo-f142477914-960.webp", "imageCredit": { "by": "Stilfehler", "license": "CC BY-SA 4.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.ko", "url": "https://commons.wikimedia.org/wiki/File:Kitchen_Drawer_with_Plastic_Organizer.jpg" }, "active": true },
+    { "example": true, "id": 1, "name": "리필형 먼지 테이프 클리너", "category": "청소", "originalPrice": 12000, "salePrice": 8900, "discountRate": 26, "checkedAt": "2026-11-10T21:00:00+09:00", "link": "https://www.coupang.com/", "platform": "coupang", "image": "assets/img/photo-f132216709-960.webp", "imageCredit": { "by": "Jernej Furman", "license": "CC BY 2.0", "licenseUrl": "https://creativecommons.org/licenses/by/2.0/deed.ko", "url": "https://commons.wikimedia.org/wiki/File:Green_Handle_White_Sticky_Brush_(44273709980).jpg" }, "active": true }
+  ]
+}
