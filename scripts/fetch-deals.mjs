@@ -29,7 +29,7 @@ const NO_KEY_MESSAGE = 'API 키가 없습니다. deals.json을 직접 수정하�
 export const CATEGORY_IDS = {
   주방: 1013,   // 주방용품
   수납: 1015,   // 홈인테리어
-  청소: 1014,   // 생활용품
+  '청소·세탁': 1014,   // 생활용품
   책상: 1021,   // 문구/오피스
 };
 const PER_CATEGORY = 10;

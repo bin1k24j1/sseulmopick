@@ -28,6 +28,18 @@ const safeUrl = (u) => (/^https?:\/\//i.test(u || '') ? u : '');
 
 const SNS = { instagram: '인스타그램', youtube: '유튜브', tiktok: '틱톡' };
 
+// 사진이 없는 딜: 카테고리 아이콘 카드 (24×24 선 아이콘)
+const ICONS = {
+  '주방': '<path d="M4 11h13v3a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-3z"/><path d="M17 12.5h3"/><path d="M8 4c-.6 1 .6 2 0 3M12 4c-.6 1 .6 2 0 3"/>',
+  '수납': '<path d="M3.5 8h17v11a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1V8z"/><path d="M2.5 4.5h19V8h-19z"/><path d="M10 12h4"/>',
+  '청소·세탁': '<path d="M12 6.5a1.6 1.6 0 1 0-1.6-1.6"/><path d="M12 6.5v1.2L3 13.5h18L12 7.7"/><path d="M5 13.5V20M19 13.5V20M8.5 13.5v4.5M15.5 13.5v4.5"/>',
+  '책상': '<path d="M3 10h18M5 10v10M19 10v10M14 10v6h5"/><path d="M8 10V6.5l3-2 2 1.5"/>',
+};
+const FALLBACK_ICON = '<path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/>';
+const media = (d, i) => (d.image
+  ? `<img src="${esc(d.image)}" alt="${esc(d.name)}" width="480" height="480" loading="${i < 4 ? 'eager' : 'lazy'}" decoding="async">`
+  : `<div class="card__icon"><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[d.category] || FALLBACK_ICON}</svg><span>${esc(d.category || '자취템')}</span></div>`);
+
 // 카드마다 ±1도 안쪽의 손맛. id로 정해서 다시 그려도 같은 기울기
 const tilt = (id) => (((Number(id) * 5) % 9) - 4) * 0.22; // 1→+0.22, 2→-0.66, 3→+0.44 … 이웃 카드끼리 엇갈림
 
@@ -40,7 +52,7 @@ function card(d, i, tag = 'li', cls = '') {
   return `
   <${tag} class="card ${cls}${stale ? ' is-stale' : ''}" data-id="${esc(d.id)}" style="--tilt:${tilt(d.id).toFixed(2)}deg">
     <div class="card__media">
-      ${d.image ? `<img src="${esc(d.image)}" alt="${esc(d.name)}" width="480" height="480" loading="${i < 4 ? 'eager' : 'lazy'}" decoding="async">` : ''}
+      ${media(d, i)}
       <span class="sticker" aria-label="${esc(d.id)}번 딜"><span aria-hidden="true">#</span>${esc(d.id)}</span>
       <span class="badges">
         ${stale ? '<span class="badge badge--stale">지난 딜</span>' : ''}
@@ -95,7 +107,8 @@ function render() {
   $('[data-status]').textContent = num
     ? (shown.length ? `#${num}번 딜이에요${stale.length ? ' · 지난 딜' : ''}` : '')
     : pick ? (rest.length ? `다른 딜 ${rest.length}개 · 가격 확인 최신순` : '')
-      : (fresh.length ? `${cat} 딜 ${fresh.length}개 · 가격 확인 최신순` : '');
+      : fresh.length ? `${cat} 딜 ${fresh.length}개 · 가격 확인 최신순`
+        : stale.length ? '지금 가격이 확인된 딜이 없어요. 아래는 지난 딜이에요.' : '';
   $$('[data-chips] .chip').forEach((b) => b.setAttribute('aria-pressed', String(!num && b.dataset.cat === cat)));
   $('[data-clear]').hidden = !num;
   if (num && shown.length) $('main .list .card')?.classList.add('is-hit');

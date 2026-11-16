@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>쓸모픽 프로필 이미지</title>
+<!-- 1080×1080으로 열어 캡처: profile.html → profile.png, profile.html?icon → profile-icon.png -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root { --bg: #FFF8EE; --ink: #1F1B16; --accent: #FF5A36; }
+  html, body { margin: 0; width: 1080px; height: 1080px; overflow: hidden; background: var(--bg); }
+  body {
+    display: grid; place-items: center;
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+  }
+  /* 사이트 상단 로고와 같은 짜임: 기울어진 체크 스티커 + 굵은 글자 */
+  .logo { display: flex; align-items: center; gap: 40px; color: var(--ink); }
+  .sticker { width: 228px; height: 228px; flex: none; transform: rotate(-12deg); }
+  .sticker svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 8px 8px rgba(31, 27, 22, .18)); }
+  .sticker circle { fill: var(--accent); stroke: #fff; stroke-width: 2; }
+  .sticker path { fill: none; stroke: #fff; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+  .word { font-size: 211px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  /* 아이콘 버전: 스티커만 크게 */
+  .icon .word { display: none; }
+  .icon .sticker { width: 600px; height: 600px; }
+  .icon .sticker svg { filter: drop-shadow(0 22px 22px rgba(31, 27, 22, .18)); }
+</style>
+</head>
+<body>
+  <div class="logo" aria-label="쓸모픽">
+    <span class="sticker" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15"/><path d="M9.5 16.5l4.5 4.5 8.5-9"/></svg>
+    </span>
+    <span class="word">쓸모픽</span>
+  </div>
+  <script>if (location.search.includes('icon')) document.body.classList.add('icon');</script>
+</body>
+</html>
